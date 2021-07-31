@@ -3,6 +3,7 @@
 <head>
     <title>Test</title>
     <meta charset="utf8" />
+    <meta http-equiv="Cache-Control" content="no-cache">
 
     <script src="js/bootstrap/jquery.min.js"></script>
 
@@ -15,7 +16,7 @@
     <div id="messages"></div>
     <form id="message_form">
         <input type="text" name="message" />
-        <button onclick="onSend(); return false;">Send</button>
+        <input type="button" onclick="onSend()" value="Send" />
     </form>
 </body>
 
