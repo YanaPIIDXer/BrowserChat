@@ -1,8 +1,10 @@
 const buildDom = (message, isMine) => {
-    $message = $("<div>" + message + "</div>");
-    className = "other";
+    $message = $("<p>" + message + "</p>");
+    className = "border alert ";
     if (isMine) {
-        className = "mine";
+        className += "alert-success text-right";
+    } else {
+        className += "alert-secondary text-left";
     }
     $message.addClass(className);
 
