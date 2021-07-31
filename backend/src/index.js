@@ -8,9 +8,10 @@ var sockList = [];
 sock.on("connection", (ws) => {
     sockList.push(ws);
     ws.on("message", (message) => {
+        const msg = message.toString("utf8");
         sockList.map((s) => {
             if (s != ws) {
-                s.send(message);
+                s.send(msg);
             }
         });
     });
