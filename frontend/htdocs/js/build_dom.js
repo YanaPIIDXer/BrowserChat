@@ -1,3 +1,5 @@
 const buildDom = (message) => {
-    alert(message);
+    $message = $("<div>" + message + "</div>");
+    $messages = $("#messages");
+    $message.appendTo($messages);
 }
