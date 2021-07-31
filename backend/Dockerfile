@@ -10,3 +10,5 @@ RUN npm install
 ADD ./src /app
 
 EXPOSE 3000
+
+CMD ["node", "index.js"]
