@@ -14,9 +14,9 @@
 
 <body>
     <div id="messages"></div>
-    <form id="message_form">
+    <form id="message_form" onsubmit="onSend(); return false;">
         <input type="text" name="message" />
-        <input type="button" onclick="onSend(); return false;" value="Send" />
+        <input type="submit" value="Send" />
     </form>
 </body>
 
