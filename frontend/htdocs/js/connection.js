@@ -1,3 +1,3 @@
 const sendMessage = (message) => {
-    buildDom(message);
+    buildDom(message, true);
 }
