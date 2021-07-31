@@ -14,4 +14,8 @@ sock.on("connection", (ws) => {
             }
         });
     });
+
+    ws.on("close", () => {
+        sockList.splice(ws);
+    });
 });
