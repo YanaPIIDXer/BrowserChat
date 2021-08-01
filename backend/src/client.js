@@ -1,8 +1,4 @@
-
-// クライアントと共通の定義
-// HACK:JSONの中に埋め込むので仕方なく重複定義
-// TODO:リファクタリング
-const SEND_MESSAGE = 1;
+const Types = require("./json_types");
 
 // クライアントクラス
 class Client {
@@ -15,7 +11,7 @@ class Client {
 
     // メッセージ送信
     sendMessage(name, message) {
-        this._socket.send(JSON.stringify({ "type": SEND_MESSAGE, "name": name, "message": message }));
+        this._socket.send(JSON.stringify({ "type": Types.SEND_MESSAGE, "name": name, "message": message }));
     }
 
     // IDのゲッター

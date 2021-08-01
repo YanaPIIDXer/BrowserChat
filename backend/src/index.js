@@ -2,16 +2,12 @@ const Client = require("./client");
 const server = require("ws").Server;
 const sock = new server({ port: 3000 });
 
+const Types = require("./json_types");
+
 console.log("Start ChatServer!");
 
 var clientList = {};
 var nextClientId = 1;
-
-// クライアントと共通の定義
-const NAME_ENTRY = 0;
-const SEND_MESSAGE = 1;
-const JOIN_OTHER = 2;
-const LEAVE_OTHER = 3;
 
 sock.on("connection", (ws) => {
     var myClient = new Client(nextClientId, ws);
@@ -20,11 +16,11 @@ sock.on("connection", (ws) => {
     ws.on("message", (json) => {
         const data = JSON.parse(json);
         switch (data.type) {
-            case NAME_ENTRY:
+            case Types.NAME_ENTRY:
                 myClient.name = data.name;
                 break;
 
-            case SEND_MESSAGE:
+            case Types.SEND_MESSAGE:
                 if (!myClient.isValid) { return; }
                 const msg = data.message;
                 Object.values(clientList).map((client) => {
