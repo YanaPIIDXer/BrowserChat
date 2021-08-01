@@ -5,6 +5,11 @@ const SEND_MESSAGE = 1;
 var sock = null;
 window.onload = () => {
     sock = new WebSocket("ws://127.0.0.1:3000");
+    sock.addEventListener("open", () => {
+        var name = prompt("名前を入力してください", "名無し");
+        sock.send(JSON.stringify({ "type": NAME_ENTRY, "name": name }));
+    });
+
     sock.addEventListener("message", (e) => {
         const recv = JSON.parse(e.data);
         buildDom(recv.message, false);

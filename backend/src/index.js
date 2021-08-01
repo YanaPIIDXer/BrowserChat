@@ -19,12 +19,14 @@ sock.on("connection", (ws) => {
         const data = JSON.parse(json);
         switch (data.type) {
             case NAME_ENTRY:
+                myClient.name = data.name;
                 break;
 
             case SEND_MESSAGE:
+                if (!myClient.isValid) { return; }
                 const msg = data.message.toString("utf8");
                 Object.values(clientList).map((client) => {
-                    if (client != myClient) {
+                    if (client != myClient && client.isValid) {
                         client.sendMessage(msg);
                     }
                 });
