@@ -7,17 +7,29 @@ console.log("Start ChatServer!");
 var clientList = {};
 var nextClientId = 1;
 
+// クライアントと共通の定義
+const NAME_ENTRY = 0;
+const SEND_MESSAGE = 1;
+
 sock.on("connection", (ws) => {
     var myClient = new Client(nextClientId, ws);
     clientList[nextClientId] = myClient;
     nextClientId++;
-    ws.on("message", (message) => {
-        const msg = message.toString("utf8");
-        Object.values(clientList).map((client) => {
-            if (client != myClient) {
-                client.sendMessage(msg);
-            }
-        });
+    ws.on("message", (json) => {
+        const data = JSON.parse(json);
+        switch (data.type) {
+            case NAME_ENTRY:
+                break;
+
+            case SEND_MESSAGE:
+                const msg = data.message.toString("utf8");
+                Object.values(clientList).map((client) => {
+                    if (client != myClient) {
+                        client.sendMessage(msg);
+                    }
+                });
+                break;
+        }
     });
 
     ws.on("close", () => {
