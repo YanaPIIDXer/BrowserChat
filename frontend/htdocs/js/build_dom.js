@@ -1,4 +1,5 @@
 const buildMessageDom = (name, message, isMine) => {
+    name = escapeHTML(name);
     message = escapeHTML(message);
     $messages = $("#messages");
 
