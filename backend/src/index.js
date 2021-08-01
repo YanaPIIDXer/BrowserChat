@@ -1,22 +1,26 @@
+const Client = require("./client");
 const server = require("ws").Server;
 const sock = new server({ port: 3000 });
 
 console.log("Start ChatServer!");
 
-var sockList = [];
+var clientList = {};
+var nextClientId = 1;
 
 sock.on("connection", (ws) => {
-    sockList.push(ws);
+    var myClient = new Client(nextClientId, ws);
+    clientList[nextClientId] = myClient;
+    nextClientId++;
     ws.on("message", (message) => {
         const msg = message.toString("utf8");
-        sockList.map((s) => {
-            if (s != ws) {
-                s.send(msg);
+        Object.values(clientList).map((client) => {
+            if (client != myClient) {
+                client.sendMessage(msg);
             }
         });
     });
 
     ws.on("close", () => {
-        sockList.splice(sockList.indexOf(ws), 1);
+        delete clientList[myClient.id];
     });
 });
