@@ -17,3 +17,11 @@ const buildMessageDom = (name, message, isMine) => {
     $message.addClass(className);
     $message.appendTo($messages);
 }
+
+const buildSystemMessageDom = (message) => {
+    $messages = $("#messages");
+
+    $message = $("<p>" + message + "</p>");
+    $message.addClass("border alert alert-dard text-center");
+    $message.appendTo($messages);
+}

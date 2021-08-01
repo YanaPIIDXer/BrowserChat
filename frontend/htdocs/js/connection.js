@@ -1,6 +1,8 @@
 // サーバと共通の定義
 const NAME_ENTRY = 0;
 const SEND_MESSAGE = 1;
+const JOIN_OTHER = 2;
+const LEAVE_OTHER = 3;
 
 var sock = null;
 window.onload = () => {
@@ -12,7 +14,18 @@ window.onload = () => {
 
     sock.addEventListener("message", (e) => {
         const recv = JSON.parse(e.data);
-        buildMessageDom(recv.name, recv.message, false);
+        console.log(recv);
+        switch (recv.type) {
+            case SEND_MESSAGE:
+                buildMessageDom(recv.name, recv.message, false);
+                break;
+            case JOIN_OTHER:
+                buildSystemMessageDom(recv.name + "が入室しました");
+                break;
+            case LEAVE_OTHER:
+                buildSystemMessageDom(recv.name + "が退室しました");
+                break;
+        }
     });
 
     sock.addEventListener("error", (e) => {
