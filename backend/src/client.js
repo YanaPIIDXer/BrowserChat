@@ -8,8 +8,8 @@ class Client {
     }
 
     // メッセージ送信
-    sendMessage(message) {
-        this._socket.send(JSON.stringify({ "message": message }));
+    sendMessage(name, message) {
+        this._socket.send(JSON.stringify({ "name": name, "message": message }));
     }
 
     // IDのゲッター
@@ -27,7 +27,7 @@ class Client {
         return this._name;
     }
     set name(name) {
-        this.name = name;
+        this._name = name;
     }
 }
 

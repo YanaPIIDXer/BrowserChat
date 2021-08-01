@@ -27,7 +27,7 @@ sock.on("connection", (ws) => {
                 const msg = data.message.toString("utf8");
                 Object.values(clientList).map((client) => {
                     if (client != myClient && client.isValid) {
-                        client.sendMessage(msg);
+                        client.sendMessage(myClient.name, msg);
                     }
                 });
                 break;
