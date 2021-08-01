@@ -1,4 +1,5 @@
 const buildMessageDom = (name, message, isMine) => {
+    message = escapeHTML(message);
     $messages = $("#messages");
 
     if (!isMine) {
@@ -19,9 +20,19 @@ const buildMessageDom = (name, message, isMine) => {
 }
 
 const buildSystemMessageDom = (message) => {
+    message = escapeHTML(message);
     $messages = $("#messages");
 
     $message = $("<p>" + message + "</p>");
     $message.addClass("border alert alert-dard text-center");
     $message.appendTo($messages);
+}
+
+// 参考：https://techacademy.jp/magazine/46853
+const escapeHTML = (string) => {
+    return string.replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#x27');
 }
