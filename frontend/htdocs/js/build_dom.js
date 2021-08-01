@@ -1,4 +1,4 @@
-const buildDom = (name, message, isMine) => {
+const buildMessageDom = (name, message, isMine) => {
     $messages = $("#messages");
 
     if (!isMine) {

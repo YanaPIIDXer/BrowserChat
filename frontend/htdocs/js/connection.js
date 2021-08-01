@@ -12,7 +12,7 @@ window.onload = () => {
 
     sock.addEventListener("message", (e) => {
         const recv = JSON.parse(e.data);
-        buildDom(recv.name, recv.message, false);
+        buildMessageDom(recv.name, recv.message, false);
     });
 
     sock.addEventListener("error", (e) => {
@@ -25,6 +25,6 @@ window.onload = () => {
 const sendMessage = (message) => {
     if (sock === null) { return; }
 
-    buildDom(null, message, true);
+    buildMessageDom(null, message, true);
     sock.send(JSON.stringify({ "type": SEND_MESSAGE, "message": message }));
 }
