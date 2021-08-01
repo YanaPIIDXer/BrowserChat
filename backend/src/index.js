@@ -18,6 +18,11 @@ sock.on("connection", (ws) => {
         switch (data.type) {
             case Types.NAME_ENTRY:
                 myClient.name = data.name;
+                Object.values(clientList).map((client) => {
+                    if (client != myClient && client.isValid) {
+                        client.noticeJoin(myClient.name);
+                    }
+                });
                 break;
 
             case Types.SEND_MESSAGE:
@@ -34,5 +39,10 @@ sock.on("connection", (ws) => {
 
     ws.on("close", () => {
         delete clientList[myClient.id];
+        Object.values(clientList).map((client) => {
+            if (client.isValid) {
+                client.noticeLeave(myClient.name);
+            }
+        });
     });
 });
