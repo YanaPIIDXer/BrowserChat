@@ -2,7 +2,8 @@ var sock = null;
 window.onload = () => {
     sock = new WebSocket("ws://127.0.0.1:3000");
     sock.addEventListener("message", (e) => {
-        buildDom(e.data, false);
+        const recv = JSON.parse(e.data);
+        buildDom(recv.message, false);
     });
 
     sock.addEventListener("error", (e) => {

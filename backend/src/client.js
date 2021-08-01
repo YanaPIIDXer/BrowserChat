@@ -8,7 +8,7 @@ class Client {
 
     // メッセージ送信
     sendMessage(message) {
-        this._socket.send(message);
+        this._socket.send(JSON.stringify({ "message": message }));
     }
 
     // IDのゲッター
