@@ -1,4 +1,12 @@
-const buildDom = (message, isMine) => {
+const buildDom = (name, message, isMine) => {
+    $messages = $("#messages");
+
+    if (!isMine) {
+        $name = $("<p>" + name + "</p>");
+        $name.addClass("badge badge-secondary text-left");
+        $name.appendTo($messages);
+    }
+
     $message = $("<p>" + message + "</p>");
     className = "border alert ";
     if (isMine) {
@@ -7,7 +15,5 @@ const buildDom = (message, isMine) => {
         className += "alert-secondary text-left";
     }
     $message.addClass(className);
-
-    $messages = $("#messages");
     $message.appendTo($messages);
 }
