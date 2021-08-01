@@ -25,7 +25,7 @@ const buildSystemMessageDom = (message) => {
     $messages = $("#messages");
 
     $message = $("<p>" + message + "</p>");
-    $message.addClass("border alert alert-dard text-center");
+    $message.addClass("border alert alert-dark text-center");
     $message.appendTo($messages);
 }
 
