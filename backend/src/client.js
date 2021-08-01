@@ -2,13 +2,18 @@
 class Client {
     // コンストラクタ
     constructor(id, socket) {
-        this.id = id;
-        this.socket = socket;
+        this._id = id;
+        this._socket = socket;
     }
 
     // メッセージ送信
     sendMessage(message) {
-        this.socket.send(message);
+        this._socket.send(message);
+    }
+
+    // IDのゲッター
+    get id() {
+        return this._id;
     }
 }
 
